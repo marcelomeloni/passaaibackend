@@ -2,7 +2,13 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config(); // Para ler as variáveis de ambiente (como as chaves do Supabase)
+process.on('uncaughtException', (err) => {
+  console.error('❌ Erro não tratado:', err);
+});
 
+process.on('unhandledRejection', (reason) => {
+  console.error('❌ Promise rejeitada:', reason);
+});
 // Inicialização do app Express
 const app = express();
 
@@ -14,12 +20,12 @@ app.use(express.json()); // Permite que o servidor entenda requisições com cor
 const profileRoutes = require('./routes/profile');
 const questionsRoutes = require('./routes/questions');
 const statsRoutes = require('./routes/stats');
-
+const cursosRoutes = require('./routes/cursos');
 // Configuração dos endpoints base (prefixo /api)
 app.use('/api/profile', profileRoutes);
 app.use('/api/questions', questionsRoutes);
 app.use('/api/stats', statsRoutes);
-
+app.use('/api/cursos', cursosRoutes);
 // Rota de verificação (Health Check) para testes rápidos
 app.get('/', (req, res) => {
   res.json({ message: 'API do Sistema de Provas rodando com sucesso!' });
