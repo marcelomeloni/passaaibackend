@@ -21,11 +21,13 @@ const profileRoutes = require('./routes/profile');
 const questionsRoutes = require('./routes/questions');
 const statsRoutes = require('./routes/stats');
 const cursosRoutes = require('./routes/cursos');
+const dashboardRoutes = require('./routes/dashboard');
 // Configuração dos endpoints base (prefixo /api)
 app.use('/api/profile', profileRoutes);
 app.use('/api/questions', questionsRoutes);
 app.use('/api/stats', statsRoutes);
 app.use('/api/cursos', cursosRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 // Rota de verificação (Health Check) para testes rápidos
 app.get('/', (req, res) => {
   res.json({ message: 'API do Sistema de Provas rodando com sucesso!' });
@@ -44,4 +46,5 @@ app.listen(PORT, () => {
   console.log(`▶ Rota de Perfil:    http://localhost:${PORT}/api/profile`);
   console.log(`▶ Rota de Questões:  http://localhost:${PORT}/api/questions`);
   console.log(`▶ Rota de Status:    http://localhost:${PORT}/api/stats`);
+  console.log(`▶ Rota de Dashboard: http://localhost:${PORT}/api/dashboard`);
 });
